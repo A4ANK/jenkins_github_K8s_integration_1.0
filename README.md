@@ -6,8 +6,8 @@
 3. Create a job chain of job1, job2, job3 and  job4 using build pipeline plugin in Jenkins 
 4. Job1 : Pull  the Github repo automatically when some developers push repo to Github.
 5. Job2 : 
-   i. create persistentVolumeClaim.
-   ii. create service for the application.
-   iii. create deployment for the application.
+   1. create persistentVolumeClaim.
+   2. create service for the application.
+   3. create deployment for the application.
 6. Job3 : Test your app if it  is working or not.
 7. Job4 : if app is not working , then send email to developer with error messages and redeploy the application after code is being edited by the developer
