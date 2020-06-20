@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nfs-client-pod-dynamic-provisioner
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      env: nfs-client-pod-dynamic-provisioner
+  template:
+    metadata:
+      labels:
+        env: nfs-client-pod-dynamic-provisioner
+    spec:
+      serviceAccountName: nfs-dynamic-provisioner # name of service account created in rbac.yaml
+      containers:
+        - name: nfs-client-pod-dynamic-provisioner
+          image: quay.io/external_storage/nfs-client-provisioner:latest
+          volumeMounts:
+            - name: nfs-provisioner-volume
+              mountPath: /persistentvolumes
+          env:
+            - name: PROVISIONER_NAME # environmental variable for provisioner name
+              value: nfs-storageclass # same as provisioner name value in storage class 
+            - name: NFS_SERVER # environmental variable for nfs server
+              value: 192.168.99.102 # IP of the NFS server
+            - name: NFS_PATH # environmental variable for nfs directory path which is exported
+              value: /storage # path to NFS directory setup
+      volumes:
+       - name: nfs-provisioner-volume # same as volumeMounts name
+         nfs:
+           server: 192.168.99.102
+           path: /storage
