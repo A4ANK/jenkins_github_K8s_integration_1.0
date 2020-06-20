@@ -10,4 +10,4 @@
    2. create service for the application.
    3. create deployment for the application.
 6. Job3 : Test your app if it  is working or not.
-7. Job4 : if app is not working , then send email to developer with error messages and redeploy the application after code is being edited by the developer
+7. Job4 : if app is not working then trigger job 2 and then send email to developer with error messages and then when developer will do necessary changes in the code then redeploy the application.
