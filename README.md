@@ -65,6 +65,12 @@ NAME                                                  READY   STATUS    RESTARTS
 nfs-client-pod-dynamic-provisioner-684557596c-x4z6v   1/1     Running   0          9m28s
 
 [root@server ~]# kubectl describe pods nfs-client-pod-dynamic-provisioner-684557596c-x4z6v | grep Volumes -A 5
+Volumes:
+  nfs-provisioner-volume:
+    Type:      NFS (an NFS mount that lasts the lifetime of a pod)
+    Server:    192.168.99.102
+    Path:      /storage
+    ReadOnly:  false
 ```
 
 We also need to configure a kubeconfig file in the home directory of root user since we are running kubectl command using sudo.
