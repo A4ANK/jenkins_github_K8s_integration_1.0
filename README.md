@@ -22,7 +22,7 @@ A pre-installed K8s cluster(e.g. minikube). In minikube by default, there is no 
 *Creating this part of the task is very easy in the Openshift Container Platform.
 Also, install Github, Build Pipeline Plugin in Jenkins.
 
-`
+```
 [root@server ~]# mkdir /storage
 [root@server ~]# chmod 0777 -R /storage
 [root@server ~]# ls -ahl / | grep storage
@@ -65,11 +65,11 @@ NAME                                                  READY   STATUS    RESTARTS
 nfs-client-pod-dynamic-provisioner-684557596c-x4z6v   1/1     Running   0          9m28s
 
 [root@server ~]# kubectl describe pods nfs-client-pod-dynamic-provisioner-684557596c-x4z6v | grep Volumes -A 5
-`
+```
 
 We also need to configure a kubeconfig file in the home directory of root user since we are running kubectl command using sudo.
 
-`
+```
 [root@server ~]# kubectl config view
 apiVersion: v1
 clusters:
@@ -90,5 +90,34 @@ users:
   user:
     client-certificate: /root/client.crt
     client-key: /root/client.key
-`
+```
 
+Now we can start doing our tasks and jobs using Jenkins.
+# Job1
+Pull the Github repo automatically when some developers push repo to Github.
+![ngrok](images/ngrok.png)
+![webhook](images/webhook.png)
+![job1](images/job1.png)
+
+# Job2
+   1. create a persistent volume claim.
+   2. create service for the application.
+   3. create a deployment for the application.
+![job2](images/job2.1.png)
+![job2](images/job2.2.png)
+
+# Job3
+Test your app if it is working or not.
+![job3](images/job3.png)
+
+# Job4
+If an app is not working then trigger job 2 and then send email to the developer with error messages and then when the developer will do necessary changes in the code then redeploy the application.
+![job4](images/job4.1.png)
+![job4](images/job4.2.png)
+
+
+P.S.- Any questions or suggestions are welcome.
+All the scripts and configuration files are present at the GitHub repo.
+https://github.com/A4ANK/jenkins_github_K8s_integration_1.0
+
+  
