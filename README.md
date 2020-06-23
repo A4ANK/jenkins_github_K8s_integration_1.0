@@ -1,6 +1,6 @@
 # Integration of Kubernetes(using NFS-server & 3rd party NFS-client Dynamic provisioning) with Jenkins and Github.
 ## To create resources like Pods, Deployment, PVC and Service, etc on the top of K8s.
-
+![jobs](images/jobs.png)
 Tasks to be created:-
 1. Create container image that’s has Jenkins installed using Dockerfile Or You can use the Jenkins Server on RHEL 8/7
 2. When we launch this image, it should automatically starts Jenkins service in the container.
