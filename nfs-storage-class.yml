@@ -2,6 +2,6 @@ apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
   name: NFS_Dynamic_SC
-provisioner: ank/NFS-prov
+provisioner: ank/NFS_Dynamic_SC
 parameters:
   archiveOnDelete: "false"
