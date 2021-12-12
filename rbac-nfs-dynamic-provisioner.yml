@@ -30,7 +30,7 @@ metadata:
   name: NFS-dyn-prov-CRB
 subjects:
   - kind: ServiceAccount
-    name: NFS-dyn-prov-SA # defined on top of file
+    name: NFS-dyn-prov-SA
     namespace: default
 roleRef:
   kind: ClusterRole
