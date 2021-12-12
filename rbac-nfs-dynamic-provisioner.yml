@@ -4,7 +4,7 @@ metadata:
   name: nfs-dynamic-provisioner 
 ---
 kind: ClusterRole
-apiVersion: rbac.authorization.k8s.io/v1 # auth API
+apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: nfs-dynamic-provisioner-clusterRole
 rules:
