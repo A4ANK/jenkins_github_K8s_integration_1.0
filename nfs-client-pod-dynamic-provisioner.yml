@@ -23,7 +23,7 @@ spec:
               mountPath: /persistentvolumes
           env:
             - name: PROVISIONER_NAME
-              value: ank/NFS-prov
+              value: ank/NFS_Dynamic_SC
             - name: NFS_SERVER
               value: 192.168.99.102
             - name: NFS_PATH
