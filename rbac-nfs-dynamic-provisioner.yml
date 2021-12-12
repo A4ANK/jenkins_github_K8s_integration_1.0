@@ -1,57 +1,38 @@
 kind: ServiceAccount
 apiVersion: v1
 metadata:
-  name: nfs-dynamic-provisioner 
+  name: NFS-dyn-prov-SA
 ---
 kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: nfs-dynamic-provisioner-clusterRole
+  name: NFS-dyn-prov-CR
 rules:
+  - apiGroups: ["storage.k8s.io"]
+    resources: ["storageclasses"]
+    verbs: ["get", "list", "watch"]
   - apiGroups: [""]
     resources: ["persistentvolumes"]
     verbs: ["get", "list", "watch", "create", "delete"]
   - apiGroups: [""]
     resources: ["persistentvolumeclaims"]
     verbs: ["get", "list", "watch", "update"]
-  - apiGroups: ["storage.k8s.io"]
-    resources: ["storageclasses"]
-    verbs: ["get", "list", "watch"]
   - apiGroups: [""]
     resources: ["events"]
     verbs: ["create", "update", "patch"]
+  - apiGroups: [""]
+    resources: ["endpoints"]
+    verbs: ["get", "list", "watch", "create", "update", "patch"]    
 ---
 kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: nfs-dynamic-provisioner-rolebinding
+  name: NFS-dyn-prov-CRB
 subjects:
   - kind: ServiceAccount
-    name: nfs-dynamic-provisioner # defined on top of file
+    name: NFS-dyn-prov-SA # defined on top of file
     namespace: default
 roleRef:
   kind: ClusterRole
-  name: nfs-dynamic-provisioner-clusterRole
-  apiGroup: rbac.authorization.k8s.io
----
-kind: Role
-apiVersion: rbac.authorization.k8s.io/v1
-metadata:
-  name: nfs-dynamic-provisioner-otherRoles
-rules:
-  - apiGroups: [""]
-    resources: ["endpoints"]
-    verbs: ["get", "list", "watch", "create", "update", "patch"]
----
-kind: RoleBinding
-apiVersion: rbac.authorization.k8s.io/v1
-metadata:
-  name: nfs-dynamic-provisioner-otherRoles
-subjects:
-  - kind: ServiceAccount
-    name: nfs-dynamic-provisioner
-    namespace: default
-roleRef:
-  kind: Role
-  name: nfs-dynamic-provisioner-otherRoles
+  name: NFS-dyn-prov-CR
   apiGroup: rbac.authorization.k8s.io
